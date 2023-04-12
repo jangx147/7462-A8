@@ -31,6 +31,7 @@ library(tigris)
 #| message: false
 #| echo: false
 #| warning: false
+#| include: false
 
 ## Load the API key
 api_key <- Sys.getenv("MAPS_API_KEY")
@@ -143,23 +144,26 @@ mn_rent.ggmap <- hennepin_base.gg +
           aes(fill = estimate, text = text_label),
           colour = "black", size = 0.1,
           inherit.aes = FALSE) + 
-  labs(title = "Hennepin County, MN 2020 ACS \nMedian Rent Cost Per Month") + 
+  labs(title = "Hennepin County, MN 2020 ACS Median Rent Cost Per Month") + 
   scale_fill_viridis_c("Median Rent Cost", labels = scales::dollar) +
   theme_map() +
   theme(
-    plot.title   = element_text(size  = 12,
+    plot.title   = element_text(size  = 14,
                                 hjust = 0.5),
-    legend.text  = element_text(size = 12),
-    legend.title = element_text(size = 12),
+    legend.text  = element_text(size = 14),
+    legend.title = element_text(size = 14),
     legend.position = "right"
   )
 
+```
+```{r}
+#| echo: false
+
 #Display plotly
 ggplotly(mn_rent.ggmap,
-         tooltip = "text",
-         height  = 600,
-         width   = 800) %>%
+         tooltip = "text") %>%
+         #height  = 600,
+         #width   = 800) %>%
   style(hoveron = "fills")
-  #style(hoverlabel = text)
-
 ```
+
